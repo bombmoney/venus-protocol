@@ -12,8 +12,7 @@ contract GovernorBravoDelegator is GovernorBravoDelegatorStorage, GovernorBravoE
 	        uint votingPeriod_,
 	        uint votingDelay_,
             uint proposalThreshold_,
-            address guardian_,
-            uint8 proposalCount_
+            address guardian_
     )
         public
     {
@@ -21,14 +20,13 @@ contract GovernorBravoDelegator is GovernorBravoDelegatorStorage, GovernorBravoE
         // Admin set to msg.sender for initialization
         admin = msg.sender;
 
-        delegateTo(implementation_, abi.encodeWithSignature("initialize(address,address,uint256,uint256,uint256,address,uint8)",
+        delegateTo(implementation_, abi.encodeWithSignature("initialize(address,address,uint256,uint256,uint256,address)",
                                                             timelock_,
                                                             xvsVault_,
                                                             votingPeriod_,
                                                             votingDelay_,
                                                             proposalThreshold_,
-                                                            guardian_,
-                                                            proposalCount_));
+                                                            guardian_));
 
         _setImplementation(implementation_);
 

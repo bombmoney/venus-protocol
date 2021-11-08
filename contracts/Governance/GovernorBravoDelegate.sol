@@ -49,7 +49,8 @@ contract GovernorBravoDelegate is GovernorBravoDelegateStorageV1, GovernorBravoE
         uint votingPeriod_,
         uint votingDelay_,
         uint proposalThreshold_,
-        address guardian_
+        address guardian_,
+        uint8 proposalCount_
     )
         public
     {
@@ -60,6 +61,7 @@ contract GovernorBravoDelegate is GovernorBravoDelegateStorageV1, GovernorBravoE
         require(votingPeriod_ >= MIN_VOTING_PERIOD && votingPeriod_ <= MAX_VOTING_PERIOD, "GovernorBravo::initialize: invalid voting period");
         require(votingDelay_ >= MIN_VOTING_DELAY && votingDelay_ <= MAX_VOTING_DELAY, "GovernorBravo::initialize: invalid voting delay");
         require(proposalThreshold_ >= MIN_PROPOSAL_THRESHOLD && proposalThreshold_ <= MAX_PROPOSAL_THRESHOLD, "GovernorBravo::initialize: invalid proposal threshold");
+        require(proposalCount_ >= 0, "GovernorBravo::initialize: invalid proposal count");
 
         timelock = TimelockInterface(timelock_);
         xvsVault = XvsVaultInterface(xvsVault_);
@@ -68,6 +70,7 @@ contract GovernorBravoDelegate is GovernorBravoDelegateStorageV1, GovernorBravoE
         proposalThreshold = proposalThreshold_;
         proposalMaxOperations = 10;
         guardian = guardian_;
+        proposalCount = proposalCount_;
     }
 
     /**
